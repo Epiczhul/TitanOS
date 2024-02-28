@@ -1,0 +1,39 @@
+-- Bibliothek für die Eingabe
+local input = require("input")
+
+-- Bibliothek für das Dateisystem
+local fs = require("fs")
+
+-- Bibliothek für die Umgebungsvariablen
+local os = require("os")
+
+-- Setze den Startordner auf /root/
+os.setenv("HOME", "/root/")
+
+-- Endlosschleife zum Anzeigen der Eingabeaufforderung und Ausführen von Befehlen
+while true do
+  -- Zeige die Eingabeaufforderung an
+  print("$ ", flush=true)
+
+  -- Lies den Befehl vom Benutzer ein
+  local command = input()
+
+  -- Wenn der Befehl leer ist, beende die Schleife
+  if command == "" then
+    break
+  end
+
+  -- Wenn der Befehl "exit" ist, beende das Programm
+  if command == "exit" then
+    return
+  end
+
+  -- Versuche, den Befehl aus /bin/ auszuführen
+  local path = "/bin/" .. command
+  if fs.isfile(path) then
+    os.execute(path)
+  else
+    -- Fehlermeldung ausgeben
+    print("Befehl nicht gefunden: " .. command)
+  end
+end
