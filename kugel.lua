@@ -6,8 +6,6 @@ local width, height = 64, 64
 local gl = gpu.createWindow3D(1, 1, 768, 320)
 gpu.refreshSize()
 gpu.setSize(64)
--- Initialisierung der Grafikkarte
-gpu.init(width, height)
 
 -- Funktion zum Zeichnen einer Kugel
 function drawSphere(x, y, radius)
